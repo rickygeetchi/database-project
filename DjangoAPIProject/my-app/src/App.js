@@ -2,7 +2,7 @@
 import { NavLink, Routes, Route } from 'react-router-dom';
 // import './App.css';
 import Home from './components/Home';
-import {Department} from './components/Department';
+import Department from './components/Department';
 import Employee from './components/Employee';
 import React from 'react';
 
