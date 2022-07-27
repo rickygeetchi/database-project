@@ -48,13 +48,52 @@ class Department extends Component{
     }
 
     createClick(){
-        fetch(variables.API_URL+'department',{
+        fetch(variables.API_URL+'department/',{
             method:'POST',
             headers:{
                 'Accept' : 'application/json',
                 'Content-Type' : 'application/json'
             },
             body:JSON.stringify({
+                DepartmentName:this.state.DepartmentName
+            })
+        })
+        .then(res=>res.json())
+        .then((result) =>{
+            alert(result);
+            this.refreshList();
+        })
+    }
+
+    updateClick(){
+        fetch(variables.API_URL+'department/',{
+            method:'PUT',
+            headers:{
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            },
+            body:JSON.stringify({
+                DepartmentId:this.state.DepartmentId,
+                DepartmentName:this.state.DepartmentName
+            })
+        })
+        .then(res=>res.json())
+        .then((result) =>{
+            alert(result);
+            this.refreshList();
+        })
+    }
+
+    deleteClick(id){
+        if(window.confirm('Are you sure?'))
+        fetch(variables.API_URL+'department/'+id,{
+            method:'Delete',
+            headers:{
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            },
+            body:JSON.stringify({
+                DepartmentId:this.state.DepartmentId,
                 DepartmentName:this.state.DepartmentName
             })
         })
@@ -82,12 +121,12 @@ class Department extends Component{
                     <thead>
                         <tr>
                             <th>
-                                DepartmentId
+                                Department Id
                             </th>
                             <th>
                                 DepartmentName
                             </th>
-                            <th>
+                            <th> 
                                 Options
                             </th>
                         </tr>
@@ -104,7 +143,7 @@ class Department extends Component{
                                    </button>
 
                                    <button type="button"
-                                   className="btn btn-light mr-1">
+                                   className="btn btn-light mr-1" onClick={()=>this.deleteClick(dep.DepartmentId)}>
                                     <i className="bi bi-trash3"></i>
                                    </button>
                                 </td>
@@ -128,11 +167,11 @@ class Department extends Component{
                                 </div>
 
                                     {DepartmentId===0?
-                                    <button type="button" className="btn btn-primary float-start">Create</button>
+                                    <button type="button" className="btn btn-primary float-start" onClick={()=>this.createClick()}>Create</button>
                                     :null }
 
                                     {DepartmentId!==0?
-                                    <button type="button" className="btn btn-primary float-start">Update</button>
+                                    <button type="button" className="btn btn-primary float-start" onClick={()=>this.updateClick()}>Update</button>
                                     :null }
 
 
