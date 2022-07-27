@@ -15,7 +15,7 @@ class Department extends Component{
             EmployeeId:0,
             EmployeeName:"",
             DateOfJoining:"",
-            PhotoFileName:"anonymous.png",
+            PhotoFileName:"anonymous.jpg",
             PhotoPath:variables.PHOTO_URL
         }
     }
@@ -41,6 +41,10 @@ class Department extends Component{
         this.setState({EmployeeName:e.target.value});
     }
 
+    changeDepartment=(e)=>{
+      this.setState({})
+    }
+
     addClick(){
         this.setState({
             modalTitle:"Add Employee",
@@ -48,7 +52,7 @@ class Department extends Component{
             EmployeeName:"",
             Department:"",
             DateOfJoining:"",
-            PhotoFileName:"anonymous.png"
+            PhotoFileName:"anonymous.jpg"
         });
     }
 
@@ -59,7 +63,7 @@ class Department extends Component{
             EmployeeName: emp.EmployeeName,
             Department:emp.Department,
             DateOfJoining:emp.DateOfJoining,
-            PhotoFileName:"anonymous.png"
+            PhotoFileName:"anonymous.jpg"
         });
     }
 
@@ -192,14 +196,32 @@ class Department extends Component{
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
-                              <div className="d-flex flex-row bd-highlight mb-3"></div>
+                              <div className="d-flex flex-row bd-highlight mb-3">
+                                <div className="p-2 w-50 bd-highlight">
+
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Employee Name</span>
                                     <input type="text" className="form-control"
                                     value={EmployeeName}
                                     onChange={this.changeEmployeeName}/>
+                                       </div>
+                                    <div className="input-group mb-3">
+                                    <span className="input-group-text">Department</span>
+                                    <select className="form-select"
+                                    
+                                    onChange={this.changeDepartment}
+                                    value={Department}>
+                                      {departments.map(dep=><option key={dep.DepartmentId}>
+                                        {dep.DepartmentName}
+                                      </option>)}
+                                    </select>
+                                    </div>
+                               
                                 </div>
-
+                                <div className="p-2 w-50 bd-highlight">
+                                  <img width="250px" height="250px"
+                                  src={PhotoPath+PhotoFileName}/>
+                                </div>
                                     {EmployeeId===0?
                                     <button type="button" className="btn btn-primary float-start" onClick={()=>this.createClick()}>Create</button>
                                     :null }
@@ -207,8 +229,8 @@ class Department extends Component{
                                     {EmployeeId!==0?
                                     <button type="button" className="btn btn-primary float-start" onClick={()=>this.updateClick()}>Update</button>
                                     :null }
-
-
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
