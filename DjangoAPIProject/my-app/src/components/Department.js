@@ -16,7 +16,7 @@ class Department extends Component{
 
             DepartmentIdFilter:"",
             DepartmentNameFilter:"",
-            departmentsWithoutFilter:[]
+            DepartmentsWithoutFilter:[]
 
         }
     }
@@ -25,19 +25,33 @@ class Department extends Component{
         var DepartmentIdFilter=this.state.DepartmentIdFilter;
         var DepartmentNameFilter=this.state.DepartmentNameFilter;
 
-        var filteredData=this.state.departmentsWithoutFilter.filter(
+        var filteredData=this.state.DepartmentsWithoutFilter.filter(
             function(el){
                 return el.DepartmentId.toString().toLowerCase().includes(
                     DepartmentIdFilter.toString().trim().toLowerCase()
                 )&& 
-                el.DepartmentId.toString().toLowerCase().includes(
-                    DepartmentIdFilter.toString().trim().toLowerCase()
+                el.DepartmentName.toString().toLowerCase().includes(
+                    DepartmentNameFilter.toString().trim().toLowerCase()
                 )
             }
         );
+        this.setState({departments:filteredData});
     }
 
-    changeDepartmentNameIdFilter = (e)=>{
+    sortResult(prop,asc){
+        var sortedData=this.state.DepartmentsWithoutFilter.sort(function(a,b){
+            if(asc){
+                return (a[prop]>b[prop])?1:((a[prop]<b[prop])?-1:0);
+            }
+            else{
+                return (b[prop]>a[prop])?1:((b[prop]<a[prop])?-1:0);
+            }
+        });
+
+        this.setState({departments:sortedData});
+    }
+
+    changeDepartmentIdFilter = (e)=>{
         this.state.DepartmentIdFilter=e.target.value;
         this.FilterFn();
     }
@@ -53,7 +67,7 @@ class Department extends Component{
         fetch(variables.API_URL+'department')
         .then(response=>response.json())
         .then(data=>{
-            this.setState({departments:data});
+            this.setState({departments:data,DepartmentsWithoutFilter:data});
         })
     }
 
@@ -155,20 +169,41 @@ class Department extends Component{
                     <thead>
                         <tr>
                             <th>
-                               
-                                Department Id
-                                <input className="form-control m-2"
+                            <div className="d-flex flex-row">
+
+                            <input className="form-control m-2"
                                 onChange={this.changeDepartmentIdFilter}
-                                placeholder="Filter"
+                                placeholder="Filter by ID"
                                 />
+                                <button type="button" className="btn btn-llight"
+                                onClick={()=>this.sortResult('DepartmentId',true)}>
+                                    <i className="bi bi-arrow-down-square-fill"></i>
+                                </button>
+                                <button type="button" className="btn btn-llight"
+                                onClick={()=>this.sortResult('DepartmentId',false)}>
+                                    <i className="bi bi-arrow-up-square-fill"></i>
+                                </button>
+                                </div>
+                                Department ID
+                               
                             </th>
                             <th>
-                            
-                                DepartmentName
-                                <input className="form-control m-2"
+                            <div className="d-flex flex-row">
+                            <input className="form-control m-2"
                                 onChange={this.changeDepartmentNameFilter}
-                                placeholder="Filter"
+                                placeholder="Filter by Name"
                                 />
+                                <button type="button" className="btn btn-llight"
+                                onClick={()=>this.sortResult('DepartmentId',true)}>
+                                    <i className="bi bi-arrow-down-square-fill"></i>
+                                </button>
+                                <button type="button" className="btn btn-llight"
+                                onClick={()=>this.sortResult('DepartmentId',false)}>
+                                    <i className="bi bi-arrow-up-square-fill"></i>
+                                </button>
+                                </div>
+                                DepartmentName
+                               
                             </th>
                             <th> 
                                 Options
