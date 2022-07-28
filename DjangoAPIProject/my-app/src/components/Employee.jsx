@@ -42,8 +42,13 @@ class Department extends Component{
     }
 
     changeDepartment=(e)=>{
-      this.setState({})
+      this.setState({Department:e.target.value});
     }
+
+    changeDateOfJoining =(e)=>{
+      this.setState({DateOfJoining:e.target.value});
+  }
+
 
     addClick(){
         this.setState({
@@ -63,7 +68,7 @@ class Department extends Component{
             EmployeeName: emp.EmployeeName,
             Department:emp.Department,
             DateOfJoining:emp.DateOfJoining,
-            PhotoFileName:"anonymous.jpg"
+            PhotoFileName:emp.PhotoFileName
         });
     }
 
@@ -75,7 +80,7 @@ class Department extends Component{
                 'Content-Type' : 'application/json'
             },
             body:JSON.stringify({
-                EmployeeId:this.state.EmployeeId,
+                
                 EmployeeName:this.state.EmployeeName,
                 Department:this.state.Department,
                 DateOfJoining: this.state.DateOfJoining,
@@ -128,6 +133,22 @@ class Department extends Component{
         })
     }
 
+    imageUpload=(e)=>{
+      e.preventDefault();
+
+      const formData=new FormData();
+      formData.append("file",e.target.files[0],e.target.files[0].name);
+
+      fetch(variables.API_URL+'employee/savefile',{
+          method:'POST',
+          body:formData
+      })
+      .then(res=>res.json())
+      .then(data=>{
+          this.setState({PhotoFileName:data});
+      })
+  }
+
     render(){
         const {
             departments,
@@ -137,7 +158,8 @@ class Department extends Component{
             EmployeeId,
             EmployeeName,
             PhotoFileName,
-            PhotoPath
+            PhotoPath,
+            DateOfJoining
 
         }=this.state;
 
@@ -208,7 +230,6 @@ class Department extends Component{
                                     <div className="input-group mb-3">
                                     <span className="input-group-text">Department</span>
                                     <select className="form-select"
-                                    
                                     onChange={this.changeDepartment}
                                     value={Department}>
                                       {departments.map(dep=><option key={dep.DepartmentId}>
@@ -216,13 +237,25 @@ class Department extends Component{
                                       </option>)}
                                     </select>
                                     </div>
+
+                                    <div className="input-group mb-3">
+                                    <span className="input-group-text">DOJ</span>
+                                    <input type="date" className="form-control"
+                                    value={DateOfJoining}
+                                    onChange={this.changeDateOfJoining}/>
+                                       </div>
                                
                                 </div>
                                 <div className="p-2 w-50 bd-highlight">
-                                  <img width="250px" height="250px"
+                                  <img width="250px" height="250px" alt="profile"
                                   src={PhotoPath+PhotoFileName}/>
+                                  <input className="m-2" type="file" onChange={this.imageUpload}/>
                                 </div>
-                                    {EmployeeId===0?
+                                  
+
+                                </div>
+
+                                {EmployeeId===0?
                                     <button type="button" className="btn btn-primary float-start" onClick={()=>this.createClick()}>Create</button>
                                     :null }
 
@@ -230,7 +263,6 @@ class Department extends Component{
                                     <button type="button" className="btn btn-primary float-start" onClick={()=>this.updateClick()}>Update</button>
                                     :null }
                                     
-                                </div>
                             </div>
                         </div>
                     </div>

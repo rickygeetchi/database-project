@@ -12,8 +12,26 @@ class Department extends Component{
             departments:[],
             modalTitle:"",
             DepartmentName:"",
-            DepartmentId:0
+            DepartmentId:0,
+
+            DepartmentIdFilter:"",
+            DepartmentName:"",
+            departmentsWithoutFilter:[]
+
         }
+    }
+
+    FilterFn(){
+        var DepartmentIdFilter=this.state.DepartmentIdFilter;
+        var DepartmentNameFilter=this.state.DepartmentNameFilter;
+
+        var filteredData=this.state.departmentsWithoutFilter.filter(
+            function(el){
+                return el.DepartmentId.toString().toLowerCase().includes(
+                    DepartmentIdFilter.toString().trim().toLowerCase()
+                )
+            }
+        )
     }
     refreshList(){
         fetch(variables.API_URL+'department')
