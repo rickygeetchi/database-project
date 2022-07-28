@@ -161,7 +161,7 @@ class Department extends Component{
         }=this.state;
 
         return(
-            <div>
+            <div className="container">
                 <h3 className="display-3 d-flex justify-content-center m-3">Departments</h3> 
                 <button type="button" className="btn btn-primary m-2 float-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>this.addClick()}>Add Department</button>
                 
