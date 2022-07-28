@@ -15,7 +15,7 @@ class Department extends Component{
             DepartmentId:0,
 
             DepartmentIdFilter:"",
-            DepartmentName:"",
+            DepartmentNameFilter:"",
             departmentsWithoutFilter:[]
 
         }
@@ -29,10 +29,26 @@ class Department extends Component{
             function(el){
                 return el.DepartmentId.toString().toLowerCase().includes(
                     DepartmentIdFilter.toString().trim().toLowerCase()
+                )&& 
+                el.DepartmentId.toString().toLowerCase().includes(
+                    DepartmentIdFilter.toString().trim().toLowerCase()
                 )
             }
-        )
+        );
     }
+
+    changeDepartmentNameIdFilter = (e)=>{
+        this.state.DepartmentIdFilter=e.target.value;
+        this.FilterFn();
+    }
+
+    changeDepartmentNameFilter = (e)=>{
+        this.state.DepartmentNameFilter=e.target.value;
+        this.FilterFn();
+    }
+
+
+
     refreshList(){
         fetch(variables.API_URL+'department')
         .then(response=>response.json())
@@ -139,10 +155,20 @@ class Department extends Component{
                     <thead>
                         <tr>
                             <th>
+                               
                                 Department Id
+                                <input className="form-control m-2"
+                                onChange={this.changeDepartmentIdFilter}
+                                placeholder="Filter"
+                                />
                             </th>
                             <th>
+                            
                                 DepartmentName
+                                <input className="form-control m-2"
+                                onChange={this.changeDepartmentNameFilter}
+                                placeholder="Filter"
+                                />
                             </th>
                             <th> 
                                 Options
