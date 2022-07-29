@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { variables } from "../Variables";
+import { ReactComponent as EmployeeSVG } from "../svg/employees.svg";
 
 // const departments=[];
 
@@ -164,9 +165,10 @@ class Department extends Component{
         }=this.state;
 
         return(
-            <div>
-                <h3 className="display-3 d-flex justify-content-center m-3">Employees</h3> 
-                <button type="button" className="btn btn-primary m-2 float-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>this.addClick()}>Add Employee</button>
+            <div className="container">
+              <div className="display-3 d-flex justify-content-center mt-5 mb-n3"><EmployeeSVG/></div>
+                {/* <h3 className="display-3 d-flex justify-content-center m-3">Employees</h3>  */}
+                <button type="button" className="btn btn-primary mt-n1 float-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>this.addClick()}>Add Employee</button>
                 
                 <table className="table table-striped">
                     <thead>

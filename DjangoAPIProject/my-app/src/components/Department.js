@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { variables } from "../Variables";
+import { ReactComponent as DepartmentSVG } from "../svg/department.svg";
 
 // const departments=[];
 
@@ -162,7 +163,8 @@ class Department extends Component{
 
         return(
             <div className="container">
-                <h3 className="display-3 d-flex justify-content-center m-3">Departments</h3> 
+                <div className="display-3 d-flex justify-content-center mt-5 mb-n3"><DepartmentSVG/></div>
+                {/* <h3 className="display-3 d-flex justify-content-center m-3">Departments</h3>  */}
                 <button type="button" className="btn btn-primary m-2 float-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>this.addClick()}>Add Department</button>
                 
                 <table className="table table-striped">
