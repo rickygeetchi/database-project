@@ -15,3 +15,8 @@ code {
 .bold{
   font-weight: bold;
 }
+
+svg:hover{
+  font-size: "300" !important;
+  fill: #fcb103!important;
+}
