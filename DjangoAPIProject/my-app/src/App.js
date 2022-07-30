@@ -6,10 +6,12 @@ import Department from './components/Department';
 import Employee from './components/Employee';
 import React from 'react';
 import NavBar from './Navbar/Header';
+import { ReactComponent as BackgroundSVG } from "./svg/background.svg";
 
 function App() {
   return (
-  <React.Fragment>
+  <div style={{backgroundImage: <BackgroundSVG />}}>
+
     {/* <div className="App container">
         <h3 className="d-flex justify-content-center m-3">React JS Frontend</h3>
         </div> */}
@@ -38,7 +40,7 @@ function App() {
               <Route path={'/employees'} element={<Employee/>}/>
               <Route path={'/department'} element={<Department/>}/>
             </Routes>
-    </React.Fragment>
+    </div>
   );
 }
 

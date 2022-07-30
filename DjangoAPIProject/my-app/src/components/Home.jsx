@@ -9,9 +9,9 @@ const Home = () => {
   return (
     <React.Fragment>
     <div className="display-3 d-flex justify-content-center mt-5 mb-n3"><Link to={'/'}><HomeSVG/></Link></div>
-    <span className='bold d-flex justify-content-center mt-6 mb-n6'>Choose One</span>
+    <span className='bold d-flex justify-content-center mt-6 mb-n6'>CHOOSE ONE</span>
     <div className="icon display-3 d-flex justify-content-center mt-5 mb-n3"><Link to={'/department'}><DepartmentSVG/></Link></div>
-    <div className="display-3 d-flex justify-content-center mt-5 mb-n3"><Link to={'/employees'}><EmployeeSVG/></Link></div>
+    <div className="icon display-3 d-flex justify-content-center mt-5 mb-n3"><Link to={'/employees'}><EmployeeSVG/></Link></div>
     </React.Fragment>
   )
 }

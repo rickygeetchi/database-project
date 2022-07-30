@@ -16,7 +16,8 @@ code {
   font-weight: bold;
 }
 
-svg:hover{
+.icon:hover svg{
   font-size: "300" !important;
   fill: #fcb103!important;
 }
+
